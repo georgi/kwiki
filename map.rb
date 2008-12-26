@@ -2,6 +2,10 @@ Kontrol.map do
   get '/$' do
     render 'pages.rhtml', :pages => pages.sort_by { |p| p.name }
   end
+
+  get '/assets/stylesheets\.css' do
+    render_stylesheets
+  end  
   
   get '/commits/(.*)' do |id|    
     render 'commit.rhtml', :commit => repo.commit(id)

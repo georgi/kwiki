@@ -1,7 +1,7 @@
-require 'wiki'
+require 'kwiki'
 
 Dir.chdir(File.dirname(__FILE__))
 
 use Rack::Reloader
 
-run Wiki.new
+run KWiki.new
