@@ -1,6 +1,6 @@
 Kontrol.map do
   get '/$' do
-    render 'pages.rhtml', :pages => pages.sort_by { |p| p.name }
+    render 'home.rhtml', :pages => pages.sort_by { |p| p.name }
   end
 
   get '/assets/stylesheets\.css' do

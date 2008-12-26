@@ -33,4 +33,11 @@ class KWiki < Kontrol::Application
     store['pages'] ||= GitStore::Tree.new
   end
 
+  def diff_line_class(line)
+    case line[0, 1]
+    when '+' then 'added'
+    when '-' then 'deleted'
+    end
+  end 
+
 end
