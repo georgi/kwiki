@@ -5,6 +5,12 @@ Kontrol.map do
 
   get '/assets/stylesheets\.css' do
     render_stylesheets
+  end
+
+  get '/assets/(.*)' do |path|
+    if_modified_since do
+      assets[path] or raise "#{path} not found"
+    end
   end  
   
   get '/commits/(.*)' do |id|    
@@ -21,8 +27,8 @@ Kontrol.map do
 
   post '/(.*)' do |name|
     page = pages[name + '.md'] ||= KWiki::Page.new(name, "")
-    page.data = params['data']
-    commit "updated `#{name}`"
+    page.body = params['data']
+    store.commit "updated `#{name}`"
     redirect name
   end
   
