@@ -1,0 +1,19 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title><%= @page and @page.title %></title>
+    <meta http-equiv="Content-Language" content="English" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="shortcut icon" type="image/x-icon" href="/assets/images/favicon.ico" />
+    <link rel="stylesheet" media="screen" type="text/css" href="/assets/stylesheets.css" />
+    <link rel="stylesheet" media="print" type="text/css" href="/assets/stylesheets/print.css" />
+  </head>
+  <body>
+    <div>
+      <%= link_to 'Pages', '/pages' %> -
+      <%= link_to 'Commits', '/commits' %>
+      <% if @page %> - <%= link_to 'Edit page', "/#{@page.name}/edit" %><% end %>
+    </div>
+    <%= @content %>
+  </body>
+</html>

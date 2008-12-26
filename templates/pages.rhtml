@@ -1,0 +1,7 @@
+<h1>Pages</h1>
+
+<ul>
+  <% for page in @pages %>
+    <li><%= link_to page.title, "/#{page.name}" %></li>
+  <% end %>
+</ul>
