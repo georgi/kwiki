@@ -21,35 +21,48 @@ class KWiki
       define_method("#{name}=") {|v| head[name] = v }
     end
 
-    attr_accessor :name, :src, :head, :body, :summary, :html, :tag_list
+    attr_reader :src, :body, :head, :summary, :html, :tag_list
+    attr_accessor :name
 
     # Initialize a page and set given attributes.
     def initialize(attributes={})
       @head = {}
       @body = ''
-      
+
+      set attributes
+    end
+
+    def set(attributes)
       attributes.each do |k, v|
         send "#{k}=", v
       end
-
-      parse(src) if src
     end
 
-    # Split up the source into header and body. Load the header as
-    # yaml document if present.
+    def src=(src)
+      @src = src
+      parse(src)
+    end
+
+    def body=(body)
+      @body = body
+      @html = transform(@body)
+      @summary = @html.split("\n\n")[0]
+    end
+    
+    # Load the header as yaml document.
+    def head=(head)
+      @head = head
+      @tag_list = tags.to_s.split(",").map { |s| s.strip }
+    end
+
+    # Split up the source into header and body. 
     def parse(src)
       if src =~ /\A---(.*?)---(.*)/m
-        @head = YAML.load($1)
-        @body = $2
+        self.head = YAML.load($1)
+        self.body = $2
       else
         raise ArgumentError, "yaml header not found in source"
       end
-
-      @html = transform(@body)
-      @summary = html.split("\n\n")[0]
-      @tag_list = tags.to_s.split(",").map { |s| s.strip }
-
-      self
     end
 
     # Convert to string representation

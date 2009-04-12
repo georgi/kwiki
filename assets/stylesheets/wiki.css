@@ -24,11 +24,10 @@
 }
 
 .menu {
-    margin: auto;
-    width: 600px;
+    margin-bottom: 20px;
 }
 
-.content {
+.container {
     margin: auto;
     width: 600px;
 }

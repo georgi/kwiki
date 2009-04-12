@@ -13,15 +13,17 @@
     <link rel="stylesheet" media="print" type="text/css" href="/assets/stylesheets/print.css" />
   </head>
   <body>
-    <div class="menu">
-      <%= link_to 'Home', '/' %> -
-      <%= link_to 'Commits', '/commits' %>
-      <% if @page %> 
-	- <%= link_to 'Edit page', edit_path(@page) %>
-      <% end %>
-    </div>
-    <div class="content">
-      <%= @content %>
+    <div class="container">
+      <h1>KWiki</h1>
+
+      <div class="menu">
+	<%= link_to 'Home', '/' %> -
+	<%= link_to 'Commits', '/commits' %>
+      </div>
+
+      <div class="content">
+	<%= @content %>
+      </div>
     </div>
   </body>
 </html>

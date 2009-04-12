@@ -1,8 +1,10 @@
 <form method="post">
   <p>
-    <input type="text" name="title"><%= @page.title %></p>
+    <label>Title</label>
+    <input type="text" style="width:100%" name="title"><%= @page.title %></p>
   </p>
   <p>
+    <label>Body</label>
     <textarea style="width:100%" name="body" rows="20"><%= @page.body %></textarea>
   </p>
   <p>

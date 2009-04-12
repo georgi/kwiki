@@ -1,6 +1,6 @@
 KWiki.map do
   get '/$' do
-    render 'home.rhtml', :pages => pages.sort_by { |p| p.name }
+    render 'index.rhtml', :pages => pages.sort_by { |p| p.name }
   end
 
   get '/assets/(.*)' do |path|
