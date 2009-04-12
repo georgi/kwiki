@@ -5,14 +5,20 @@
     <meta http-equiv="Content-Language" content="English" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="shortcut icon" type="image/x-icon" href="/assets/images/favicon.ico" />
-    <link rel="stylesheet" media="screen" type="text/css" href="/assets/stylesheets.css" />
+    <link rel="stylesheet" media="screen" type="text/css" href="/assets/stylesheets/reset.css" />
+    <link rel="stylesheet" media="screen" type="text/css" href="/assets/stylesheets/typo.css" />
+    <link rel="stylesheet" media="screen" type="text/css" href="/assets/stylesheets/table.css" />
+    <link rel="stylesheet" media="screen" type="text/css" href="/assets/stylesheets/list.css" />
+    <link rel="stylesheet" media="screen" type="text/css" href="/assets/stylesheets/wiki.css" />
     <link rel="stylesheet" media="print" type="text/css" href="/assets/stylesheets/print.css" />
   </head>
   <body>
     <div class="menu">
       <%= link_to 'Home', '/' %> -
       <%= link_to 'Commits', '/commits' %>
-      <% if @page %> - <%= link_to 'Edit page', "/#{@page.name}/edit" %><% end %>
+      <% if @page %> 
+	- <%= link_to 'Edit page', edit_path(@page) %>
+      <% end %>
     </div>
     <div class="content">
       <%= @content %>

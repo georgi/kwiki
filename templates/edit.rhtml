@@ -1,8 +1,9 @@
-<h1><%= @page.title %></h1>
-
-<form method="post" action="/<%= @page.name %>">
+<form method="post">
   <p>
-    <textarea style="width:100%" name="data" rows="20"><%= @page.body %></textarea>
+    <input type="text" name="title"><%= @page.title %></p>
+  </p>
+  <p>
+    <textarea style="width:100%" name="body" rows="20"><%= @page.body %></textarea>
   </p>
   <p>
     <input type="submit" value="Save"/>
