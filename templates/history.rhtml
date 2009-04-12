@@ -1,0 +1,17 @@
+<h2><%= @page.title %></h2>
+
+<% for diff, message in @diffs %>
+  <div class="diff">t    
+    <div class="message">
+      <%= message %>
+    </div>
+    <div class="body">
+      <% for line in diff.diff.split("\n")[3..-1] %>
+	<div class="line <%= diff_line_class line %>">
+	  <%=h line[1..-1] %>
+	</div>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
