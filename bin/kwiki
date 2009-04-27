@@ -1,0 +1,30 @@
+#!/usr/bin/env ruby
+
+require 'rubygems'
+require 'kwiki'
+
+if not ARGV[0]  
+  puts "Usage: kwiki <repository>"
+  exit
+end
+
+if not File.directory?(ARGV[0] + '/.git')
+  puts "#{ARGV[0]} is not a git repository!"
+  exit
+end
+
+app = Rack::Builder.new do
+  use Rack::ShowExceptions
+  use Rack::CommonLogger
+  use Rack::Reloader
+  use Rack::Lint
+  
+  run KWiki.new(ARGV[0])
+
+end.to_app
+
+begin
+  Rack::Handler::Mongrel.run(app, :Port => 3000)
+rescue
+  Rack::Handler::WEBrick.run(app, :Port => 3000)
+end

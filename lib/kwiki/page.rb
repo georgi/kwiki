@@ -8,21 +8,19 @@ class KWiki
   #     title: BlueCloth
   #     category: Ruby
   #     tags: markdown, library
-  #     created_at: 2008-09-05
-  #     updated_at: 2008-09-05
   #     ---
   #     This is the summary, which is by definition the first paragraph of the
   #     article. The summary shows up in list views and rss feeds.  
   #
   class Page
 
-    %w[title author created_at updated_at category tags].each do |name|
+    %w[title author category tags].each do |name|
       define_method(name) { head[name] }
       define_method("#{name}=") {|v| head[name] = v }
     end
 
-    attr_reader :src, :body, :head, :summary, :html, :tag_list
     attr_accessor :name
+    attr_reader :src, :body, :head, :summary, :html, :tag_list
 
     # Initialize a page and set given attributes.
     def initialize(attributes={})
@@ -30,6 +28,10 @@ class KWiki
       @body = ''
 
       set attributes
+      
+      raise "post without a title" if title.nil?
+      
+      @name ||= title.gsub(/ /, '_')
     end
 
     def set(attributes)
@@ -65,9 +67,13 @@ class KWiki
       end
     end
 
+    def to_param
+      name
+    end
+
     # Convert to string representation
     def dump
-      head.to_yaml + "---" + body
+      head.to_yaml + "---\n" + body
     end
 
     # Transform the body of this post.
@@ -79,23 +85,15 @@ class KWiki
       self == obj
     end
 
-    def ==(obj)
-      if KWiki::Page === obj
-        name == obj.name
-      end
-    end
-
   end
 
   class PageHandler
-    def read(name, data)
-      Page.new(:name => name.chomp('.md'), :src => data)
+    def read(data)
+      Page.new(:src => data)
     end
 
     def write(page)
-      page.body.dump
+      page.dump
     end
   end
-
-  GitStore::Handler['md'] = PageHandler.new
 end

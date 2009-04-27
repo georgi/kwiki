@@ -1,30 +1,79 @@
+body {
+    color: #333;
+    font-family: sans-serif; 
+}
+
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
+    text-decoration: none;
+}
+
+a {
+    color: #009;
+}
+
+a:visited {
+    color: #009;
+}
+
+.section {
+    margin-bottom: 20px;
+}
+
+.highlight {
+    background: #ff0;
+}
+
 .diff {
-    margin: 1em 0;
+    margin: 20px 0;
     font-family: monospace;
     border: 1px solid #ddd;
     background: #eee;
 }
 
 .diff .path {
-    color: blue;
-    padding: 1em;
+    color: #336;
+    padding: 5px 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.diff .author {
+    color: #633;
+    background: #ccc;
+    padding: 5px 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.diff .message {
+    color: #333;
+    background: #eee;
+    padding: 5px 10px;
     border-bottom: 1px solid #ddd;
 }
 
 .diff .line {
-    padding-left: 1em;
+    padding: 2px 10px;
+    background: #fff;
+    overflow: hidden;
 }
 
 .diff .added { 
-    background: #dfd;
+    background: #efe;
 }
 
 .diff .deleted { 
-    background: #fdd;
+    background: #fee;
 }
 
 .menu {
-    margin-bottom: 20px;
+    margin-bottom: 20px;    
+}
+
+.menu a {
+    text-decoration: none;
+}
+
+.menu a:hover {
+    text-decoration: underline;
 }
 
 .container {

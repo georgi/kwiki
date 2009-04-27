@@ -1,7 +1,20 @@
-<h1>Home</h1>
+<form action="/search">
+  <input type="text" name="q" value="<%= params['q'] %>"/>
+  <input type="submit" value="Search"/>
+</form>
+
+<h3>Pages</h3>
 
 <ul>
   <% for page in @pages %>
-    <li><%= link_to page.title, "/#{page.name}" %></li>
+    <li><%= link_to page.title, page_path(page) %></li>
+  <% end %>
+</ul>
+
+<h3>Recent Changes</h3>
+
+<ul>
+  <% for commit in @commits %>
+    <li><%= link_to commit.message, "/commits/#{commit.id}" %></li>
   <% end %>
 </ul>

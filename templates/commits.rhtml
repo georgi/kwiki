@@ -1,9 +1,0 @@
-<h1>Commits</h1>
-
-<ul>
-  <% for commit in @commits %>
-    <li><%= link_to commit.message, "/commits/#{commit.id}" %></li>
-  <% end %>
-</ul>
-
-<hr/>

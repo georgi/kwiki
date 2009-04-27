@@ -1,14 +1,17 @@
-<h2>Commit <%= @commit.id %></h2>
+<h2>Commit <%= @commit.id[0,8] %></h2>
 
-<em><%= @commit.author %> on <%= @commit.date %></em>
+<em><%= @commit.author_name %> on <%= @commit.author_time %></em>
 
 <pre><%= @commit.message %></pre>
 
+<h4>Files</h4>
 <ul>
   <% for diff in @commit.diffs %>
     <li><a href="#<%= diff.a_path %>"><%= diff.a_path %></a></li>
   <% end %>
 </ul>
+
+<h4>Diffs</h4>
 
 <% for diff in @commit.diffs %>
   <a name="<%= diff.a_path %>"></a>
@@ -23,5 +26,3 @@
     </div>
   </div>
 <% end %>
-
-<hr/>

@@ -4,23 +4,12 @@
     <title><%= @page and @page.title %></title>
     <meta http-equiv="Content-Language" content="English" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="shortcut icon" type="image/x-icon" href="/assets/images/favicon.ico" />
-    <link rel="stylesheet" media="screen" type="text/css" href="/assets/stylesheets/reset.css" />
-    <link rel="stylesheet" media="screen" type="text/css" href="/assets/stylesheets/typo.css" />
-    <link rel="stylesheet" media="screen" type="text/css" href="/assets/stylesheets/table.css" />
-    <link rel="stylesheet" media="screen" type="text/css" href="/assets/stylesheets/list.css" />
     <link rel="stylesheet" media="screen" type="text/css" href="/assets/stylesheets/wiki.css" />
     <link rel="stylesheet" media="print" type="text/css" href="/assets/stylesheets/print.css" />
   </head>
   <body>
     <div class="container">
-      <h1>KWiki</h1>
-
-      <div class="menu">
-	<%= link_to 'Home', '/' %> -
-	<%= link_to 'Commits', '/commits' %>
-      </div>
-
+      <h1><a href="/">KWiki</a></h1>
       <div class="content">
 	<%= @content %>
       </div>
