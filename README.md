@@ -48,3 +48,13 @@ Now just enter a page title into the location bar to create a new page:
 
 Note, that underscores will be replaced with spaces. So urls have
 underscores, but the corresponding page titles have not.
+
+[1]: http://en.wikipedia.org/wiki/Wiki
+[2]: http://git-scm.com/
+[3]: http://rack.rubyforge.org/
+[4]: http://github.com/georgi/kontrol
+[5]: http://github.com/georgi/git_store
+[6]: http://www.yaml.org/
+[7]: http://daringfireball.net/projects/markdown/
+[8]: http://en.wikipedia.org/wiki/ERuby
+
