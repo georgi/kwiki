@@ -36,8 +36,8 @@ assets/wmd/wmd-plus.js
 assets/wmd/wmd.js
 bin/kwiki
 lib/kwiki.rb
-lib/kwiki/app.rb
-lib/kwiki/map.rb
+lib/kwiki/kwiki.rb
+lib/kwiki/routes.rb
 lib/kwiki/page.rb
 lib/kwiki/tokenizer.rb
 templates/commit.rhtml

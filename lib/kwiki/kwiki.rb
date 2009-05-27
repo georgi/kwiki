@@ -4,6 +4,7 @@ class KWiki < Kontrol::Application
 
   attr_reader :store, :pages
 
+  # Initialize a Wiki with path to git repository
   def initialize(path)
     super(DIR)
     
@@ -12,38 +13,54 @@ class KWiki < Kontrol::Application
     @store.load
   end
 
+  # Return all wiki pages as array sorted by title
   def pages
     store.values.sort_by { |page| page.title }
   end
-  
+
+  # Rack interface
   def call(env)
     store.load if store.changed?
     super
   end
 
+  # Shortcut for GitStore transaction
   def transaction(message, &block)
     store.transaction(message, &block)
   end
 
-  def find_page(name)
-    store[name + '.md'] or Page.new(:title => name)
+  # Replace underscores with spaces
+  def normalize_title(title)
+    title.gsub(/_/, ' ')
   end
 
-  def save_page(name, attr)
-    page = find_page(name)
+  # Find page by title
+  def find_page(title)
+    title = normalize_title(title)
+    
+    store[title + '.md'] or Page.new(:title => title)
+  end
+
+  # Create or update a page with specified title
+  def save_page(title, attr)
+    title = normalize_title(title)
+    
+    page = find_page(title)
     page.set(attr)
     
     transaction "update `#{page.title}'" do
-      store[page.name + '.md'] = page
+      store[page.title + '.md'] = page
     end
   end
 
+  # Remove a page from the store
   def delete_page(page)
     transaction "delete `#{page.title}'" do
-      store.delete(page.name + '.md')
+      store.delete(page.title + '.md')
     end
   end
 
+  # Return the css class for a diff line
   def diff_line_class(line)
     case line[0, 1]
     when '+' then 'added'
@@ -51,17 +68,20 @@ class KWiki < Kontrol::Application
     end
   end
 
-  def page_diffs(name)
+  # Return diffs of a single page as pairs of [commit, diff]
+  def page_diffs(title)
+    title = normalize_title(title)
     list = []
     
     store.commits(100).each do |commit|
-      diffs = commit.diffs("#{name}.md")
+      diffs = commit.diffs("#{title}.md")
       list << [commit, diffs] unless diffs.empty?
     end
 
     list
   end
 
+  # Highlight given words in a section of html
   def highlight(html, words)
     tokenizer = HTML::Tokenizer.new(html)
     tokens = []
@@ -88,6 +108,7 @@ class KWiki < Kontrol::Application
     end
   end
 
+  # Search string in all pages and return pairs of [page, highlighted_match]
   def search(str)
     return [] if str.to_s.empty?
     

@@ -1,6 +1,6 @@
 class KWiki
   
-  # This class represents a page.
+  # This class represents a wiki page.
   # Each page has a header, encoded as YAML and a body.
   #
   # Example:
@@ -19,7 +19,6 @@ class KWiki
       define_method("#{name}=") {|v| head[name] = v }
     end
 
-    attr_accessor :name
     attr_reader :src, :body, :head, :summary, :html, :tag_list
 
     # Initialize a page and set given attributes.
@@ -29,22 +28,23 @@ class KWiki
 
       set attributes
       
-      raise "post without a title" if title.nil?
-      
-      @name ||= title.gsub(/ /, '_')
+      raise "title is required" if title.nil?
     end
 
+    # Set attributes by given hash
     def set(attributes)
       attributes.each do |k, v|
         send "#{k}=", v
       end
     end
 
+    # Set the source and parse
     def src=(src)
       @src = src
       parse(src)
     end
 
+    # Set the body
     def body=(body)
       @body = body
       @html = transform(@body)
@@ -68,7 +68,7 @@ class KWiki
     end
 
     def to_param
-      name
+      title.gsub(/ /, '_')
     end
 
     # Convert to string representation

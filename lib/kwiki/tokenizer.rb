@@ -1,5 +1,6 @@
 require 'strscan'
 
+# Taken from Rails
 module HTML #:nodoc:
   
   # A simple HTML tokenizer. It simply breaks a stream of text into tokens, where each

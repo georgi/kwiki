@@ -8,11 +8,6 @@ if not ARGV[0]
   exit
 end
 
-if not File.directory?(ARGV[0] + '/.git')
-  puts "#{ARGV[0]} is not a git repository!"
-  exit
-end
-
 app = Rack::Builder.new do
   use Rack::ShowExceptions
   use Rack::CommonLogger

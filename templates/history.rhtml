@@ -3,7 +3,7 @@
 <% for commit, diffs in @diffs %>
   <div class="diff">    
     <div class="author">
-      <%= commit.author_name %> on <%= commit.author_time %>
+      <%= commit.author.name %> on <%= commit.author.time %>
     </div>
     <div class="message">
       <%= commit.message %>
